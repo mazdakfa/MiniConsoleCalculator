@@ -17,6 +17,7 @@ public class CalculatorApp {
 
     public static void main(String[] args){
         CalculatorService calculator = new CalculatorService();
+        HistoryService history = new HistoryService();
         boolean inMain = true;
         while (inMain){
             System.out.println("******************[ Main Menu ]*******************");
@@ -45,6 +46,7 @@ public class CalculatorApp {
                         double b = getDouble(2);
                         double result = calculator.calculate(a,b,operator);
                         System.out.println(String.format("%.1f %s %.1f = %.2f",a,operator,b,result));
+                        history.add(String.format("%.1f %s %.1f = %.2f",a,operator,b,result));
                         break;
                     case "2":
                         System.out.println("****[ Advanced Operations (List of Numbers) ]*****");
@@ -84,12 +86,14 @@ public class CalculatorApp {
                         }
                         result = calculator.calculate(nums,opStr);
                         System.out.println(String.format("%s of %s = %.2f",opStr,nums.toString(),result));
+                        history.add(String.format("%s of %s = %.2f",opStr,nums.toString(),result));
                         break;
                     case "3":
                         System.out.println("*******************[ History ]********************");
+                        history.show();
                         break;
                     case "4":
-                        System.out.println("*********[ History completely cleared. ]**********");
+                        history.clear();
                         break;
                     case "0":
                         System.out.println("********************[ FINISH ]********************");
