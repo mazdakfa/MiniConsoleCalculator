@@ -63,6 +63,27 @@ public class CalculatorApp {
                         System.out.println("*           3. Maximum of the numbers            *");
                         System.out.println("*           4. Minimum of the numbers            *");
                         System.out.println("**************************************************");
+                        opStr ="";
+                        System.out.print("Enter the number of your desired option : ");
+                        selected = input.nextLine();
+                        switch (selected){
+                            case "1":
+                                opStr = "Sum";
+                                break;
+                            case "2":
+                                opStr = "Average";
+                                break;
+                            case "3":
+                                opStr = "Maximum";
+                                break;
+                            case "4":
+                                opStr = "Minimum";
+                                break;
+                            default:
+                                throw new InvalidOperationException("Invalid option. The entered number does not exist in the list.");
+                        }
+                        result = calculator.calculate(nums,opStr);
+                        System.out.println(String.format("%s of %s = %.2f",opStr,nums.toString(),result));
                         break;
                     case "3":
                         System.out.println("*******************[ History ]********************");
