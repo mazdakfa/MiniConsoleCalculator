@@ -36,6 +36,27 @@ public class CalculatorApp {
         }
         System.out.println("**************************************************");
     }
+
+    public static char getOperator(){
+        while (true){
+            System.out.print("Enter the operator (+ - * / %) : ");
+            String opStr = input.nextLine();
+            try {
+                if (opStr.length() != 1){
+                    throw new InvalidOperationException("The operator must be a single character.");
+                }
+                char op = opStr.charAt(0);
+                if ("+-*/%".indexOf(op) != -1){
+                    return op;
+                }else {
+                    throw new InvalidOperationException("Invalid operator " + op);
+                }
+            } catch (InvalidOperationException e) {
+                System.out.println(e.getMessage());
+            }
+        }
+    }
+
     public static void main(String[] args){
         CalculatorService calculator = new CalculatorService();
         HistoryService history = new HistoryService();
@@ -49,15 +70,7 @@ public class CalculatorApp {
                     case "1":
                         System.out.println("*******[ Simple Operations (Two Numbers) ]********");
                         double a = getDouble(1);
-                        System.out.print("Enter operator (+ - * / %) : ");
-                        String opStr = input.nextLine();
-                        if (opStr.length() != 1){
-                            throw new InvalidOperationException("The operator must be a single character.");
-                        }
-                        char operator = opStr.charAt(0);
-                        if ("+-*/%".indexOf(operator) == -1){
-                            throw new InvalidOperationException("Invalid operator " + operator);
-                        }
+                        char operator = getOperator();
                         double b = getDouble(2);
                         double result = calculator.calculate(a,b,operator);
                         System.out.println(String.format("%.1f %s %.1f = %.2f",a,operator,b,result));
@@ -75,7 +88,7 @@ public class CalculatorApp {
                             nums.add(getDouble(i+1));
                         }
                         menu("advanced");
-                        opStr ="";
+                        String opStr ="";
                         System.out.print("Enter the number of your desired option : ");
                         selected = input.nextLine();
                         switch (selected){
