@@ -6,13 +6,14 @@ import java.util.Scanner;
 public class CalculatorApp {
     static Scanner input = new Scanner(System.in);
     public static double getDouble(int it){
-        System.out.print("Enter number " + it + " : ");
-        try {
-            return Double.parseDouble(input.nextLine());
-        }catch (NumberFormatException e){
-            System.out.println("Non-numeric input. Please enter a number.");
+        while (true) {
+            System.out.print("Enter number " + it + " : ");
+            try {
+                return Double.parseDouble(input.nextLine());
+            }catch (NumberFormatException e){
+                System.out.println("Non-numeric input. Please enter a number.");
+            }
         }
-        return 0;
     }
 
     public static void menu(String menu){
