@@ -15,18 +15,32 @@ public class CalculatorApp {
         return 0;
     }
 
+    public static void menu(String menu){
+        switch (menu){
+            case "main":
+                System.out.println("******************[ Main Menu ]*******************");
+                System.out.println("*     1. Simple Operations (Two Numbers)         *");
+                System.out.println("*     2. Advanced Operations (List of Numbers)   *");
+                System.out.println("*     3. Show History                            *");
+                System.out.println("*     4. Clear History                           *");
+                System.out.println("*     0. Exit                                    *");
+                break;
+            case "advanced":
+                System.out.println("*************[ Advanced Operations ]**************");
+                System.out.println("*           1. Sum of the numbers                *");
+                System.out.println("*           2. Average of the numbers            *");
+                System.out.println("*           3. Maximum of the numbers            *");
+                System.out.println("*           4. Minimum of the numbers            *");
+                break;
+        }
+        System.out.println("**************************************************");
+    }
     public static void main(String[] args){
         CalculatorService calculator = new CalculatorService();
         HistoryService history = new HistoryService();
         boolean inMain = true;
         while (inMain){
-            System.out.println("******************[ Main Menu ]*******************");
-            System.out.println("*     1. Simple Operations (Two Numbers)         *");
-            System.out.println("*     2. Advanced Operations (List of Numbers)   *");
-            System.out.println("*     3. Show History                            *");
-            System.out.println("*     4. Clear History                           *");
-            System.out.println("*     0. Exit                                    *");
-            System.out.println("**************************************************");
+            menu("main");
             System.out.print("Enter the number of your desired option : ");
             String selected = input.nextLine();
             try {
@@ -59,12 +73,7 @@ public class CalculatorApp {
                         for (int i=0;i<count;i++){
                             nums.add(getDouble(i+1));
                         }
-                        System.out.println("*************[ Advanced Operations ]**************");
-                        System.out.println("*           1. Sum of the numbers                *");
-                        System.out.println("*           2. Average of the numbers            *");
-                        System.out.println("*           3. Maximum of the numbers            *");
-                        System.out.println("*           4. Minimum of the numbers            *");
-                        System.out.println("**************************************************");
+                        menu("advanced");
                         opStr ="";
                         System.out.print("Enter the number of your desired option : ");
                         selected = input.nextLine();
