@@ -104,28 +104,33 @@ public class CalculatorApp {
                                 String opStr ="";
                                 System.out.print("Enter the number of your desired option : ");
                                 selected = input.nextLine();
-                                switch (selected){
-                                    case "1":
-                                        opStr = "Sum";
-                                        break;
-                                    case "2":
-                                        opStr = "Average";
-                                        break;
-                                    case "3":
-                                        opStr = "Maximum";
-                                        break;
-                                    case "4":
-                                        opStr = "Minimum";
-                                        break;
-                                    case "5":
-                                        inOperationMode = false;
-                                        break;
-                                    case "0":
-                                        inOperationMode = false;
-                                        inAdvanced = false;
-                                        break;
-                                    default:
-                                        throw new InvalidOperationException("Invalid option. The entered number does not exist in the list.");
+                                try {
+                                    switch (selected){
+                                        case "1":
+                                            opStr = "Sum";
+                                            break;
+                                        case "2":
+                                            opStr = "Average";
+                                            break;
+                                        case "3":
+                                            opStr = "Maximum";
+                                            break;
+                                        case "4":
+                                            opStr = "Minimum";
+                                            break;
+                                        case "5":
+                                            inOperationMode = false;
+                                            break;
+                                        case "0":
+                                            inOperationMode = false;
+                                            inAdvanced = false;
+                                            break;
+                                        default:
+                                            throw new InvalidOperationException("Invalid option. The entered number does not exist in the list.");
+                                    }
+                                } catch (InvalidOperationException e) {
+                                    System.out.println(e.getMessage());
+                                    continue;
                                 }
                                 if (inOperationMode) {
                                     result = calculator.calculate(nums,opStr);
