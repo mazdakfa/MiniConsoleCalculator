@@ -126,7 +126,7 @@ public class CalculatorApp {
                                             inAdvanced = false;
                                             break;
                                         default:
-                                            throw new InvalidOperationException("Invalid option. The entered number does not exist in the list.");
+                                            throw new InvalidOperationException("Invalid option. Enter a number from the list.");
                                     }
                                 } catch (InvalidOperationException e) {
                                     System.out.println(e.getMessage());
@@ -152,7 +152,7 @@ public class CalculatorApp {
                         inMain = false;
                         break;
                     default:
-                        throw new InvalidOperationException("Invalid option. The entered number does not exist in the list.");
+                        throw new InvalidOperationException("Invalid option. Enter a number from the list.");
                 }
             } catch (NumberFormatException e) {
                 System.out.println("Non-numeric input. Please enter a number.");
