@@ -32,6 +32,8 @@ public class CalculatorApp {
                 System.out.println("*           2. Average of the numbers            *");
                 System.out.println("*           3. Maximum of the numbers            *");
                 System.out.println("*           4. Minimum of the numbers            *");
+                System.out.println("*           5. Enter new numbers                 *");
+                System.out.println("*           0. Return to the main menu           *");
                 break;
         }
         System.out.println("**************************************************");
@@ -84,39 +86,52 @@ public class CalculatorApp {
                         }
                         break;
                     case "2":
-                        System.out.println("****[ Advanced Operations (List of Numbers) ]*****");
-                        System.out.print("How many numbers do you want to enter? ");
-                        int count = Integer.parseInt(input.nextLine());
-                        if (count<1){
-                            throw new InvalidOperationException("The number of values must be greater than 0.");
+                        boolean inAdvanced = true;
+                        while (inAdvanced) {
+                            System.out.println("****[ Advanced Operations (List of Numbers) ]*****");
+                            System.out.print("How many numbers do you want to enter? ");
+                            int count = Integer.parseInt(input.nextLine());
+                            if (count<1){
+                                throw new InvalidOperationException("The number of values must be greater than 0.");
+                            }
+                            ArrayList<Double> nums = new ArrayList<>();
+                            for (int i=0;i<count;i++){
+                                nums.add(getDouble(i+1));
+                            }
+                            boolean inOperationMode = true;
+                            while (inOperationMode) {
+                                menu("advanced");
+                                String opStr ="";
+                                System.out.print("Enter the number of your desired option : ");
+                                selected = input.nextLine();
+                                switch (selected){
+                                    case "1":
+                                        opStr = "Sum";
+                                        break;
+                                    case "2":
+                                        opStr = "Average";
+                                        break;
+                                    case "3":
+                                        opStr = "Maximum";
+                                        break;
+                                    case "4":
+                                        opStr = "Minimum";
+                                        break;
+                                    case "5":
+                                        inOperationMode = false;
+                                        break;
+                                    case "0":
+                                        inOperationMode = false;
+                                        inAdvanced = false;
+                                        break;
+                                    default:
+                                        throw new InvalidOperationException("Invalid option. The entered number does not exist in the list.");
+                                }
+                                result = calculator.calculate(nums,opStr);
+                                System.out.println(String.format("%s of %s = %.2f",opStr,nums.toString(),result));
+                                history.add(String.format("%s of %s = %.2f",opStr,nums.toString(),result));
+                            }
                         }
-                        ArrayList<Double> nums = new ArrayList<>();
-                        for (int i=0;i<count;i++){
-                            nums.add(getDouble(i+1));
-                        }
-                        menu("advanced");
-                        String opStr ="";
-                        System.out.print("Enter the number of your desired option : ");
-                        selected = input.nextLine();
-                        switch (selected){
-                            case "1":
-                                opStr = "Sum";
-                                break;
-                            case "2":
-                                opStr = "Average";
-                                break;
-                            case "3":
-                                opStr = "Maximum";
-                                break;
-                            case "4":
-                                opStr = "Minimum";
-                                break;
-                            default:
-                                throw new InvalidOperationException("Invalid option. The entered number does not exist in the list.");
-                        }
-                        result = calculator.calculate(nums,opStr);
-                        System.out.println(String.format("%s of %s = %.2f",opStr,nums.toString(),result));
-                        history.add(String.format("%s of %s = %.2f",opStr,nums.toString(),result));
                         break;
                     case "3":
                         System.out.println("*******************[ History ]********************");
