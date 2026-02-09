@@ -10,10 +10,10 @@ public class HistoryService {
     public void show(){
         if (history.isEmpty())
             throw new InvalidOperationException("History is empty; there is nothing to display.");
-        int i=1;
-        for (String item:history){
+        int i=history.size();
+        for (String item:history.reversed()){
             System.out.printf("%3d) %s%n",i,item);
-            i++;
+            i--;
         }
     }
     public void clear(){
