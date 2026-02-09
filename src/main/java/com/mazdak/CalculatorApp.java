@@ -72,9 +72,16 @@ public class CalculatorApp {
                         double a = getDouble(1);
                         char operator = getOperator();
                         double b = getDouble(2);
-                        double result = calculator.calculate(a,b,operator);
-                        System.out.println(String.format("%.1f %s %.1f = %.2f",a,operator,b,result));
-                        history.add(String.format("%.1f %s %.1f = %.2f",a,operator,b,result));
+                        double result = 0;
+                        try {
+                            result = calculator.calculate(a,b,operator);
+                            String resultStr = String.format("%.1f %s %.1f = %.2f",a,operator,b,result);
+                            System.out.println(resultStr);
+                            history.add(resultStr);
+                        } catch (ArithmeticException e) {
+                            System.out.println(e.getMessage());
+                            history.add(String.format("%.1f %s %.1f = %s",a,operator,b,e.getMessage()));
+                        }
                         break;
                     case "2":
                         System.out.println("****[ Advanced Operations (List of Numbers) ]*****");
