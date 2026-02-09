@@ -66,9 +66,9 @@ public class CalculatorApp {
         while (inMain){
             menu("main");
             System.out.print("Enter the number of your desired option : ");
-            String selected = input.nextLine();
+            String choice = input.nextLine();
             try {
-                switch (selected){
+                switch (choice){
                     case "1":
                         System.out.println("*******[ Simple Operations (Two Numbers) ]********");
                         double a = getDouble(1);
@@ -103,9 +103,9 @@ public class CalculatorApp {
                                 menu("advanced");
                                 String opStr ="";
                                 System.out.print("Enter the number of your desired option : ");
-                                selected = input.nextLine();
+                                choice = input.nextLine();
                                 try {
-                                    switch (selected){
+                                    switch (choice){
                                         case "1":
                                             opStr = "Sum";
                                             break;
