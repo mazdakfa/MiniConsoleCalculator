@@ -127,9 +127,11 @@ public class CalculatorApp {
                                     default:
                                         throw new InvalidOperationException("Invalid option. The entered number does not exist in the list.");
                                 }
-                                result = calculator.calculate(nums,opStr);
-                                System.out.println(String.format("%s of %s = %.2f",opStr,nums.toString(),result));
-                                history.add(String.format("%s of %s = %.2f",opStr,nums.toString(),result));
+                                if (inOperationMode) {
+                                    result = calculator.calculate(nums,opStr);
+                                    System.out.println(String.format("%s of %s = %.2f",opStr,nums.toString(),result));
+                                    history.add(String.format("%s of %s = %.2f",opStr,nums.toString(),result));
+                                }
                             }
                         }
                         break;
