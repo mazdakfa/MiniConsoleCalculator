@@ -155,7 +155,7 @@ public class CalculatorApp {
                                 }
                                 if (inOperationMode) {
                                     result = calculator.calculate(nums,opStr);
-                                    String resultStr = String.format("%s of %s = %s",opStr,format(nums),format(result));
+                                    String resultStr = String.format("%-7s of %s = %s",opStr,format(nums),format(result));
                                     System.out.println(resultStr);
                                     history.add(resultStr);
                                 }
