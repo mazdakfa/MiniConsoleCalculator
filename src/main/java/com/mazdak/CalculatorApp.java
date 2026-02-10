@@ -58,6 +58,27 @@ public class CalculatorApp {
             }
         }
     }
+    public static String format(double number){
+        if (number == (long) number){
+            return String.valueOf((long) number);
+        }else {
+//            return String.format("%.2f",number);
+            return String.valueOf(number);
+        }
+    }
+
+    public static String format(ArrayList<Double> list){
+        String s = "[ ";
+        int i = 1;
+        for (Double l : list){
+            s+=format(l);
+            if (i < list.size()){
+                s+=", ";
+            }
+            i++;
+        }
+        return s + " ]";
+    }
 
     public static void main(String[] args){
         CalculatorService calculator = new CalculatorService();
@@ -77,12 +98,12 @@ public class CalculatorApp {
                         double result = 0;
                         try {
                             result = calculator.calculate(a,b,operator);
-                            String resultStr = String.format("%.1f %s %.1f = %.2f",a,operator,b,result);
+                            String resultStr = String.format("%s %s %s = %s",format(a),operator,format(b),format(result));
                             System.out.println(resultStr);
                             history.add(resultStr);
                         } catch (ArithmeticException e) {
                             System.out.println(e.getMessage());
-                            history.add(String.format("%.1f %s %.1f = %s",a,operator,b,e.getMessage()));
+                            history.add(String.format("%s %s %s = %s",format(a),operator,format(b),e.getMessage()));
                         }
                         break;
                     case "2":
@@ -134,8 +155,9 @@ public class CalculatorApp {
                                 }
                                 if (inOperationMode) {
                                     result = calculator.calculate(nums,opStr);
-                                    System.out.println(String.format("%s of %s = %.2f",opStr,nums.toString(),result));
-                                    history.add(String.format("%s of %s = %.2f",opStr,nums.toString(),result));
+                                    String resultStr = String.format("%s of %s = %s",opStr,format(nums),format(result));
+                                    System.out.println(resultStr);
+                                    history.add(resultStr);
                                 }
                             }
                         }
