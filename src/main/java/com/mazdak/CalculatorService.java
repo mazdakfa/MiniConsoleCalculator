@@ -45,8 +45,8 @@ public class CalculatorService {
         for (Double number:list){
             numberBD = BigDecimal.valueOf(number);
             sumBD = sumBD.add(numberBD);
-            maxBD = (maxBD.compareTo(numberBD)<0)? maxBD :numberBD;
-            maxBD = (maxBD.compareTo(numberBD)>0)?maxBD:numberBD;
+            minBD = (minBD.compareTo(numberBD)<0)? minBD :numberBD;
+            maxBD = (maxBD.compareTo(numberBD)>0)? maxBD :numberBD;
         }
         switch (op){
             case "Sum":
