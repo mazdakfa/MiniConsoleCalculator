@@ -1,50 +1,62 @@
 package com.mazdak;
 
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.util.ArrayList;
 
 public class CalculatorService {
     public double calculate(double a, double b, char operator){
+        BigDecimal aBD = BigDecimal.valueOf(a);
+        BigDecimal bBD = BigDecimal.valueOf(b);
+
         switch (operator){
             case '+':
-                return a+b;
+                BigDecimal sum = aBD.add(bBD);
+                return sum.doubleValue();
             case '-':
-                return a-b;
+                BigDecimal sub = aBD.subtract(bBD);
+                return sub.doubleValue();
             case '*':
-                return a*b;
+                BigDecimal mul = aBD.multiply(bBD);
+                return mul.doubleValue();
             case '/':
                 if (b==0){
                     throw new ArithmeticException("Division by zero is not allowed.");
                 }
-                return a/b;
+                BigDecimal div = aBD.divide(bBD, 4,RoundingMode.HALF_UP);
+                return div.doubleValue();
             case '%':
                 if (b==0){
                     throw new ArithmeticException("Division by zero is not allowed.");
                 }
-                return a%b;
+                BigDecimal mod = aBD.remainder(bBD);
+                return mod.doubleValue();
             default:
                 System.out.println("Invalid Operator.");
         }
         return 0;
     }
 
-    public double calculate(ArrayList<Double> nums, String op){
-        double sum =0;
-        double min = nums.get(0);
-        double max = nums.get(0);
-        for (Double n:nums){
-            sum+=n;
-            min = (min < n)?min:n;
-            max = (max > n)?max:n;
+    public double calculate(ArrayList<Double> list, String op){
+        BigDecimal sumBD = BigDecimal.ZERO;
+        BigDecimal numberBD = BigDecimal.ZERO;
+        BigDecimal minBD = BigDecimal.valueOf(list.get(0));
+        BigDecimal maxBD = BigDecimal.valueOf(list.get(0));
+        for (Double number:list){
+            numberBD = BigDecimal.valueOf(number);
+            sumBD = sumBD.add(numberBD);
+            maxBD = (maxBD.compareTo(numberBD)<0)? maxBD :numberBD;
+            maxBD = (maxBD.compareTo(numberBD)>0)?maxBD:numberBD;
         }
         switch (op){
             case "Sum":
-                return sum;
+                return sumBD.doubleValue();
             case "Average":
-                return sum / nums.size();
+                return sumBD.divide(BigDecimal.valueOf(list.size()),4,RoundingMode.HALF_UP).doubleValue();
             case "Minimum":
-                return min;
+                return minBD.doubleValue();
             case "Maximum":
-                return max;
+                return maxBD.doubleValue();
         }
         return 0;
     }
